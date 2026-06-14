@@ -1,0 +1,238 @@
+/* #region fonts */
+@font-face {
+    font-family: 'SVN-Conqueror Didot';
+    src: url(/assets/fonts/SVN-Conqueror\ Didot.otf);
+}
+
+@font-face {
+    font-family: 'UTM Avo';
+    src: url(/assets/fonts/UTM\ Avo.ttf);
+}
+
+@font-face {
+    font-family: 'UTM AvoBold';
+    src: url(/assets/fonts/UTM\ AvoBold.ttf);
+}
+
+@font-face {
+    font-family: 'UTM Beautiful Caps';
+    src: url(/assets/fonts/UTM\ Beautiful\ Caps.ttf);
+}
+/* #endregion */
+
+/* #region Override theme */
+.site-content .ast-container {
+    max-width: 100%;
+    padding: 0;
+}
+
+.page .entry-header {
+    display: none;
+}
+
+.entry-content[data-ast-blocks-layout] > * {
+    max-width: 100%;
+}
+
+.site-header {
+    position: fixed;
+    top: 0;
+    background-color: #A70508;
+    z-index: 1000;
+    /* min-height: 96px; */
+    width: 100%;
+}
+
+.ast-plain-container.ast-no-sidebar #primary {
+    margin-top: 80px;
+    margin-bottom: 0;
+}
+
+.ast-primary-header-bar {
+    background-color: #A70508;
+    border: unset;
+}
+
+.main-header-menu > .menu-item > .menu-link, #astra-footer-menu > .menu-item > .menu-link {
+    font-family: 'UTM Avo';
+    font-weight: 400;
+    font-size: 16px;
+    color: #FFF;
+    text-transform: uppercase;
+}
+
+.ast-builder-menu-1 .menu-item.current-menu-item > .menu-link, .ast-builder-menu-1 .inline-on-mobile .menu-item.current-menu-item > .ast-menu-toggle, .ast-builder-menu-1 .current-menu-ancestor > .menu-link {
+    font-family: 'UTM AvoBold';
+    color: #FFF;
+}
+/* #endregion */
+
+/* #region footer */
+.footer {
+    background: #FFF;
+    padding: 60px 0;
+    font-family: 'UTM Avo';
+    font-size: 14px;
+    color: #000;
+}
+
+.footer-container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 40px;
+}
+
+.footer-wrap {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 60px;
+}
+
+/* ===== LEFT ===== */
+
+.footer-info {
+    flex: 1.8;
+}
+
+.footer-title {
+    font-family: 'UTM AvoBold';
+    font-size: 18px;
+    padding-bottom: 16px;
+}
+
+.footer-hl {
+    position: relative;
+    padding-left: 12px;
+}
+
+.footer-hl:before {
+    content: "";
+    position: absolute;
+
+    left: 0;
+    top: 0;
+
+    width: 4px;
+    height: 100%;
+
+    background: linear-gradient(180deg, #951818 0%, rgba(255, 255, 255, 0) 100%);
+}
+
+.footer-block h4 {
+    font-family: 'UTM AvoBold';
+    font-size: 18px;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.footer-block p {
+    margin-bottom: 8px;
+}
+
+.hotline {
+    font-size: 16px;
+}
+
+/* ===== MENU ===== */
+
+.footer-menu {
+    min-width: 220px;
+}
+
+.footer-menu h4 {
+    font-family: 'UTM AvoBold';
+    font-size: 18px;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.footer-menu ul {
+    list-style: none;
+    margin: 0;
+}
+
+.footer-menu li {
+    margin-bottom: 8px;
+}
+
+.footer-menu a {
+    color: #000;
+    font-size: 14px;
+    text-decoration: none;
+}
+
+/* ===== SOCIAL ===== */
+
+.footer-social {
+    min-width: 180px;
+}
+
+.footer-social h4 {
+    font-family: 'UTM AvoBold';
+    font-size: 18px;
+    line-height: 1;
+    margin-bottom: 8px;
+}
+
+.social-list {
+    display: flex;
+    gap: 16px;
+}
+
+.social-list a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.social-list img {
+    width: 25px;
+    height: 25px;
+    object-fit: contain;
+}
+
+/* ===== LOGO ===== */
+
+.footer-logo {
+    min-width: 250px;
+    text-align: center;
+}
+
+.footer-logo img {
+    width: 172px;
+    max-width: 100%;
+}
+
+/* ===== RESPONSIVE ===== */
+
+@media (max-width: 1024px) {
+    .footer-wrap {
+        flex-wrap: wrap;
+    }
+
+    .footer-logo {
+        width: 100%;
+    }
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        padding: 0 16px;
+    }
+
+    .footer-wrap {
+        flex-direction: column;
+        gap: 40px;
+    }
+
+    .footer-block p,
+    .footer-menu a {
+        font-size: 16px;
+    }
+
+    .hotline {
+        font-size: 18px;
+    }
+}
+/* #endregion */
