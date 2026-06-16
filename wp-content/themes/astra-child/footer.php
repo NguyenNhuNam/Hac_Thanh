@@ -33,6 +33,67 @@ if ( ! defined( 'ABSPATH' ) ) {
 	wp_footer();
 ?>
 
+<section class="register-section">
+	<div class="register-container">
+		<div class="register-card" data-aos="zoom-in">
+			<div class="register-header">
+				<h2>LIÊN HỆ</h2>
+				<p>Nhận tư vấn ngay cho sự kiện sắp tới của bạn!</p>
+			</div>
+
+			<form class="register-form">
+
+				<?php wp_nonce_field('register_form_action', 'register_form_nonce'); ?>
+				<input type="hidden" name="action" value="handle_register_form">
+
+				<div class="form-group">
+					<label>Họ và tên</label>
+					<input type="text" name="user_fullname" placeholder="Value" required />
+				</div>
+
+				<div class="form-group">
+					<label>Số điện thoại</label>
+					<input type="text" name="user_phone" placeholder="Value" required />
+				</div>
+
+				<div class="form-group checkbox-group">
+					<label>Dịch vụ tiệc</label>
+					<div class="checkbox-list">
+						<label>
+							<input type="checkbox" name="services[]" value="Tiệc cưới" checked />
+							Tiệc cưới
+						</label>
+						<label>
+							<input type="checkbox" name="services[]" value="Tiệc doanh nghiệp" />
+							Tiệc doanh nghiệp
+						</label>
+						<label>
+							<input type="checkbox" name="services[]" value="Tiệc đầy năm" />
+							Tiệc đầy năm
+						</label>
+						<label>
+							<input type="checkbox" name="services[]" value="Tiệc khác" />
+							Tiệc khác
+						</label>
+					</div>
+				</div>
+
+				<button type="submit" class="btn-submit">Gửi</button>
+			</form>
+
+		</div>
+
+		<div class="register-vertical-text">
+			<span>HẠC THÀNH</span>
+			<span>CENTER</span>
+		</div>
+
+		<!-- <a href="tel:0123456789" class="phone-button">
+		<i class="fas fa-phone-alt"></i>
+	</a> -->
+	</div>
+</section>
+
 <footer class="footer">
     <div class="footer-container">
 		<div class="footer-title">TRUNG TÂM TỔ CHỨC SỰ KIỆN & TIỆC CƯỚI HẠC THÀNH CENTER</div>

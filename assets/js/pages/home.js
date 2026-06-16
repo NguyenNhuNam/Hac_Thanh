@@ -4,6 +4,25 @@ window.addEventListener('load', () => {
 
 AOS.init({ once: true, duration: 500, offset: 200 });
 
+if ("scrollRestoration" in history) {
+  history.scrollRestoration = "manual";
+}
+
+function resetScroll() {
+  window.scrollTo(0, 0);
+
+  requestAnimationFrame(() => {
+    lenis.scrollTo(0, {
+      immediate: true,
+    });
+
+    ScrollTrigger.refresh();
+  });
+}
+
+window.addEventListener("load", resetScroll);
+window.addEventListener("pageshow", resetScroll);
+
 const lenis = new Lenis({
   lerp: 0.05, 
   wheelMultiplier: 1, 
@@ -23,7 +42,7 @@ gsap.registerPlugin(ScrollTrigger) ;
 
 ScrollTrigger.create({
     trigger: ".intro-image-scroll",
-    start: "top top",
+    start: "top 80px",
     end: "+=300px",
     pinSpacing: false,
     pin: true
@@ -156,10 +175,26 @@ gsap.matchMedia().add({
 
 });
 
+/* ==========================
+   ELEMENTS
+========================== */
+
 const promoNumber = document.getElementById("promo-number");
 const promoSection = document.querySelector(".promotion-section");
 
-let isInsidePromotion = false;
+/* ==========================
+   CONFIG
+========================== */
+
+const HEADER_HEIGHT = 120;
+
+/* ==========================
+   STATE
+========================== */
+
+let isAnimating = false;
+let canSlideDown = false;
+let canSlideUp = false;
 
 /* ==========================
    SWIPER
@@ -169,14 +204,17 @@ const swiper = new Swiper(".promotionSwiper", {
     direction: "vertical",
     slidesPerView: 1,
     speed: 1000,
-    allowTouchMove: false
+    allowTouchMove: false,
+    resistanceRatio: 0
 });
 
 /* ==========================
    UPDATE NUMBER
 ========================== */
 
-swiper.on("slideChange", () => {
+function updateSlideNumber() {
+
+    if (!promoNumber) return;
 
     const number = String(swiper.realIndex + 1)
         .padStart(2, "0");
@@ -187,27 +225,68 @@ swiper.on("slideChange", () => {
         promoNumber.textContent = number;
         promoNumber.classList.remove("change");
     }, 200);
+}
 
+updateSlideNumber();
+
+swiper.on("slideChange", updateSlideNumber);
+
+/* ==========================
+   SWIPER EVENTS
+========================== */
+
+swiper.on("transitionEnd", () => {
+
+    isAnimating = false;
+
+    if (typeof lenis !== "undefined") {
+        lenis.start();
+    }
+
+    updatePromotionState();
 });
 
 /* ==========================
-   CHECK SECTION IN VIEWPORT
+   SECTION STATE
 ========================== */
 
 function updatePromotionState() {
 
     const rect = promoSection.getBoundingClientRect();
 
-    isInsidePromotion =
-        rect.top <= 80 &&
-        rect.bottom > 80;
+    /*
+        Scroll xuống:
+
+        Top section đã lên tới header
+        và section vẫn còn hiện diện trong viewport
+    */
+    canSlideDown =
+        rect.top <= HEADER_HEIGHT &&
+        rect.bottom > HEADER_HEIGHT;
+
+    /*
+        Scroll lên:
+
+        Bottom section đã chạm đáy viewport
+        và top vẫn nằm phía trên viewport
+    */
+    canSlideUp =
+        rect.bottom >= window.innerHeight &&
+        rect.top < window.innerHeight;
 }
 
 updatePromotionState();
 
 window.addEventListener(
     "scroll",
-    updatePromotionState
+    updatePromotionState,
+    { passive: true }
+);
+
+window.addEventListener(
+    "resize",
+    updatePromotionState,
+    { passive: true }
 );
 
 /* ==========================
@@ -218,82 +297,62 @@ window.addEventListener(
     "wheel",
     (e) => {
 
-        if (!isInsidePromotion) return;
+        const isFirst =
+            swiper.activeIndex === 0;
 
         const isLast =
             swiper.activeIndex === swiper.slides.length - 1;
 
-        const isFirst =
-            swiper.activeIndex === 0;
+        if (isAnimating) {
 
-        /* SCROLL DOWN */
+            e.preventDefault();
+            return;
+        }
+
+        /* ==========================
+           SCROLL DOWN
+        ========================== */
 
         if (e.deltaY > 0) {
+
+            if (!canSlideDown) return;
 
             if (!isLast) {
 
                 e.preventDefault();
 
-                lenis.stop();
+                isAnimating = true;
+
+                if (typeof lenis !== "undefined") {
+                    lenis.stop();
+                }
 
                 swiper.slideNext();
-
-                setTimeout(() => {
-                    lenis.start();
-                }, 1000);
             }
         }
 
-        /* SCROLL UP */
+        /* ==========================
+           SCROLL UP
+        ========================== */
 
-        else {
+        else if (e.deltaY < 0) {
+
+            if (!canSlideUp) return;
 
             if (!isFirst) {
 
                 e.preventDefault();
 
-                lenis.stop();
+                isAnimating = true;
+
+                if (typeof lenis !== "undefined") {
+                    lenis.stop();
+                }
 
                 swiper.slidePrev();
-
-                setTimeout(() => {
-                    lenis.start();
-                }, 1000);
             }
         }
     },
     { passive: false }
 );
-
-document.addEventListener('DOMContentLoaded', () => {
-
-    const checkboxes = document.querySelectorAll(
-    '.checkbox-list input[type="checkbox"]'
-    );
-
-    checkboxes.forEach(current => {
-        current.addEventListener('change', () => {
-
-            checkboxes.forEach(item => {
-                if (item !== current) {
-                    item.checked = false;
-                }
-            });
-
-        });
-    });
-
-    const form = document.querySelector('.register-form');
-
-    form.addEventListener('submit', (e) => {
-        e.preventDefault();
-
-        const name = form.querySelector('input[type="text"]').value;
-
-        console.log('Submit:', name);
-
-        // xử lý gửi form ở đây
-    });
-
-});
 

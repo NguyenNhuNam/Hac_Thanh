@@ -32,6 +32,10 @@ if ( apply_filters( 'astra_header_profile_gmpg_link', true ) ) {
 <?php astra_head_bottom(); ?>
 <link rel="stylesheet" href="/assets/css/aos.css">
 <link rel="stylesheet" href="/assets/css/base.css">
+<script>
+    const ajaxUrl = '<?php echo admin_url('admin-ajax.php'); ?>';
+</script>
+<script defer src="/assets/js/base.js"></script>
 <style>
 
 html.lenis {
