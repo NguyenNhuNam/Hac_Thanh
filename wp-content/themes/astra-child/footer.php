@@ -88,9 +88,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 			<span>CENTER</span>
 		</div>
 
-		<!-- <a href="tel:0123456789" class="phone-button">
-		<i class="fas fa-phone-alt"></i>
-	</a> -->
+		<a href="tel:0813111136" class="phone-button">
+			<img src="/assets/images/footer/ic-hotline.png" alt="hotline">
+		</a>
 	</div>
 </section>
 
@@ -106,7 +106,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<p>marketing@hacthanh.com</p>
 					<p>Địa chỉ: Số 35 Đinh Hương, P. Hàm Rồng, Tỉnh Thanh Hóa</p>
 					<p class="hotline">
-						Hotline: 0812.111.136 - 0813.111.136
+						Hotline: 0813.111.136
 					</p>
 				</div>
 			</div>
@@ -116,9 +116,9 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<h4>Mục lục</h4>
 
 				<ul>
-					<li><a href="#">Home</a></li>
+					<li><a href="/">Home</a></li>
 					<li><a href="#">Về chúng tôi</a></li>
-					<li><a href="#">Dịch vụ</a></li>
+					<li><a href="/dich-vu/">Dịch vụ</a></li>
 					<li><a href="#">Ưu đãi</a></li>
 					<li><a href="#">Liên hệ</a></li>
 				</ul>
@@ -135,6 +135,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 					<a href="#">
 						<img src="/assets/images/footer/ic-gg.png" alt="">
+					</a>
+
+					<a href="#">
+						<img src="/assets/images/footer/ic-tiktok.png" alt="">
 					</a>
 
 					<a href="#">

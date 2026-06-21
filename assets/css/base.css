@@ -36,6 +36,10 @@ body.page {
     background-color: #232323 !important;
 }
 
+#ast-scroll-top {
+    display: none !important;
+}
+
 ::-webkit-scrollbar {
     display: none;
 }
@@ -286,35 +290,44 @@ body.page {
     color: transparent;
 }
 
-/* PHONE */
-
+/* ==========================
+   PHONE BUTTON BASE
+========================== */
 .phone-button {
-    position: absolute;
-
-    right: 60px;
-    bottom: 60px;
-
-    width: 90px;
-    height: 90px;
-
-    border-radius: 50%;
-
-    background: #c30000;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    color: #000;
-    font-size: 34px;
-
-    text-decoration: none;
-
-    transition: .3s;
+    position: fixed;
+    bottom: 30px;      /* Cách đáy 30px */
+    right: 20px;       /* Cách phải 20px */
+    z-index: 9999;     /* Nằm trên cùng */
+    width: 60px;
+    height: 60px;
+    
+    /* Ẩn ban đầu */
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(20px);
+    transition: all 0.3s ease;
 }
 
-.phone-button:hover {
-    transform: scale(1.08);
+.phone-button img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+}
+
+/* Class thêm vào khi scroll đủ điều kiện */
+.phone-button.is-visible {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+/* ==========================
+   ẨN TRÊN DESKTOP
+========================== */
+@media (min-width: 992px) {
+    .phone-button {
+        display: none !important;
+    }
 }
 
 /* RESPONSIVE */
@@ -477,7 +490,7 @@ body.page {
 }
 
 .social-list img {
-    width: 25px;
+    width: auto;
     height: 25px;
     object-fit: contain;
 }
