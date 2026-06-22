@@ -104,7 +104,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 					<h4>Liên hệ</h4>
 
 					<p>marketing@hacthanh.com</p>
-					<p>Địa chỉ: Số 35 Đinh Hương, P. Hàm Rồng, Tỉnh Thanh Hóa</p>
+					<p>Địa chỉ: Số 35 Đình Hương, P. Hàm Rồng, Tỉnh Thanh Hóa</p>
 					<p class="hotline">
 						Hotline: 0813.111.136
 					</p>
@@ -129,7 +129,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 				<h4>Contact</h4>
 
 				<div class="social-list">
-					<a href="#">
+					<a href="https://www.facebook.com/hacthanhcenter.eventandwedding/">
 						<img src="/assets/images/footer/ic-fb.png" alt="">
 					</a>
 
@@ -137,11 +137,11 @@ if ( ! defined( 'ABSPATH' ) ) {
 						<img src="/assets/images/footer/ic-gg.png" alt="">
 					</a>
 
-					<a href="#">
+					<a href="https://www.tiktok.com/@hc.thnh.center">
 						<img src="/assets/images/footer/ic-tiktok.png" alt="">
 					</a>
 
-					<a href="#">
+					<a href="tel:0813111136">
 						<img src="/assets/images/footer/ic-phone.png" alt="">
 					</a>
 				</div>

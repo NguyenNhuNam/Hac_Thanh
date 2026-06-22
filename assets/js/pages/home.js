@@ -1,44 +1,45 @@
-window.addEventListener('load', () => {
-    AOS.refreshHard();
-});
+gsap.registerPlugin(ScrollTrigger);
 
-AOS.init({ once: true, duration: 800, offset: 200 });
+AOS.init({ 
+    once: true, 
+    duration: 800 
+});
 
 if ("scrollRestoration" in history) {
     history.scrollRestoration = "manual";
 }
-
-function resetScroll() {
-    window.scrollTo(0, 0);
-
-    requestAnimationFrame(() => {
-        lenis.scrollTo(0, {
-            immediate: true,
-        });
-
-        ScrollTrigger.refresh();
-    });
-}
-
-window.addEventListener("load", resetScroll);
-window.addEventListener("pageshow", resetScroll);
 
 const lenis = new Lenis({
     lerp: 0.05,
     wheelMultiplier: 1,
 });
 
-function raf(time) {
-    lenis.raf(time);
-    ScrollTrigger.update();
-    requestAnimationFrame(raf);
+
+function resetScroll() {
+    lenis.scrollTo(0, {
+        immediate: true, 
+        force: true     
+    });
+
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            ScrollTrigger.refresh();
+            AOS.refreshHard(); 
+        });
+    });
 }
 
+window.addEventListener("load", resetScroll);
+window.addEventListener("pageshow", resetScroll);
+
+function raf(time) {
+    lenis.raf(time);
+    ScrollTrigger.update(); 
+    requestAnimationFrame(raf);
+}
 requestAnimationFrame(raf);
 
 lenis.on("scroll", ScrollTrigger.update);
-
-gsap.registerPlugin(ScrollTrigger);
 
 ScrollTrigger.create({
     trigger: ".intro-image-scroll",
@@ -46,20 +47,16 @@ ScrollTrigger.create({
     end: "+=300px",
     pinSpacing: false,
     pin: true
-})
-
-gsap.to(".marquee-track", {
-    xPercent: -50,
-    duration: 20,
-    ease: "none",
-    repeat: 1
 });
 
-gsap.to(".marquee-track-1", {
+gsap.to(".marquee-track, .marquee-track-1", {
     xPercent: -50,
     duration: 20,
     ease: "none",
-    repeat: 1
+    repeat: -1, 
+    modifiers: {
+        xPercent: gsap.utils.unitize(x => parseFloat(x) % 50)
+    }
 });
 
 gsap.utils.toArray(".reveal").forEach((item) => {
@@ -144,18 +141,16 @@ items.forEach(item => {
 
 const banquetSwiper = new Swiper(".banquet-slider", {
     slidesPerView: 'auto',
-
     spaceBetween: 0,
-
     loop: true,
-
+    observer: true,      
+    observeParents: true, 
     freeMode: {
         enabled: true,
         momentumRatio: 0.8,
         momentumVelocityRatio: 0.8,
         sticky: false,
     },
-
     grabCursor: true,
 });
 
@@ -192,10 +187,6 @@ const aboutSwiper = new Swiper('.about-swiper', {
     fadeEffect: { crossFade: true },
     loop: true,
     speed: 1000,
-    // autoplay: {
-    //     delay: 5000,
-    //     disableOnInteraction: false,
-    // },
     pagination: {
         el: '.about-pagination',
         clickable: true,
