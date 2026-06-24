@@ -1268,6 +1268,10 @@
         width: 32px;
         margin-bottom: 12px;
     }
+
+    .quote-content {
+        padding: 0 16px;
+    }
 }
 
 /* #endregion */
