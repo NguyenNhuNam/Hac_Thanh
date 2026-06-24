@@ -182,26 +182,33 @@ gsap.matchMedia().add({
 });
 
 
+let isAboutAosFired = false; 
+
 const aboutSwiper = new Swiper('.about-swiper', {
     effect: 'slide',
     fadeEffect: { crossFade: true },
     loop: true,
     speed: 1000,
+    autoHeight: true,
     pagination: {
         el: '.about-pagination',
         clickable: true,
     },
     on: {
         slideChangeTransitionStart: function () {
-            const swiperEl = this.el;
+            if (isAboutAosFired) return;
 
+            const swiperEl = this.el;
             swiperEl.querySelectorAll('.aos-animate').forEach(function (el) {
                 el.classList.remove('aos-animate');
             });
         },
         slideChangeTransitionEnd: function () {
+            if (isAboutAosFired) return;
+
             setTimeout(function () {
                 AOS.refreshHard();
+                isAboutAosFired = true; 
             }, 50);
         }
     }
