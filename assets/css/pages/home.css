@@ -988,7 +988,7 @@
 }
 
 .about-img {
-    max-height: 400px;
+    aspect-ratio: 800/400;
     overflow: hidden;
 }
 
