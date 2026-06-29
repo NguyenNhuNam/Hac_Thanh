@@ -375,10 +375,10 @@
     transition: all ease 0.3s;
 }
 
-.category-btn:hover {
+.category-btn:hover, .category-btn:focus {
+    color: #C10000;
     transform: translateY(-2px);
     box-shadow: 0 6px 20px rgba(210, 187, 129, 0.5);
-    color: #000000;
 }
 
 .category-btn.mobile-show {
